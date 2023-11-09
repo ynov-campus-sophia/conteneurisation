@@ -1,3 +1,4 @@
 helm/questdb
 helm/tutorial/2
 node_modules
+.pydevproject
