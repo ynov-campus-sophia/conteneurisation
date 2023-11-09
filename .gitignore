@@ -1,5 +1,3 @@
 helm/questdb
 helm/tutorial/2
-docker/lockfile
-docker/secure
-docker/slim
+node_modules
