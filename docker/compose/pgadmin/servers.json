@@ -9,5 +9,5 @@
             "SSLMode": "prefer",
             "MaintenanceDB": "crypto-executor"
         }
-     }
+    }
 }
