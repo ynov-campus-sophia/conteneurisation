@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  nodeapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: nodeapp_container
+    depends_on:
+      - mongodb
+    environment:
+      DB_URL: mongodb://mongodb:27017/dbmongo
+
+volumes:
+  mongodb_data:
+    driver: local
