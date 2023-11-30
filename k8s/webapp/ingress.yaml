@@ -6,12 +6,12 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
   labels:
-    app.kubernetes.io/instance: example-webapp-test
+    app.kubernetes.io/instance: example-webapp-duduc
   name: example-webapp-test
 spec:
   ingressClassName: nginx
   rules:
-  - host: webapp.ynovsophia.ddns.net
+  - host: duduc.ynov.ddns.net
     http:
       paths:
       - backend:
@@ -23,5 +23,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - webapp-adam.ynovsophia.ddns.net
+    - duduc.ynov.ddns.net
     secretName: webapp-general-tls
