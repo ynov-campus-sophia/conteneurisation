@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  app:
+    build: .
+    environment:
+      - DB_URL=mongodb://localhost:27017/demo
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:

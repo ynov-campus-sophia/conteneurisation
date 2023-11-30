@@ -1,5 +1,5 @@
 FROM node:18.18.2-bullseye-slim
-COPY src .
+ADD app.js .
 COPY package-lock.json .
 COPY package.json .
 ENV DB_URL=mongodb://localhost:27017
