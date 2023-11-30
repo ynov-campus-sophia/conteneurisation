@@ -39,4 +39,8 @@ services:
   
 volumes:
   pgvol:
+<<<<<<< HEAD
   pgdata:
+=======
+  pgdata:
+>>>>>>> bf5a58b9cca772905e5babe78fb5033f5ef4f63b

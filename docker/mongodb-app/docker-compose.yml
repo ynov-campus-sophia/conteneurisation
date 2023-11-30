@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.8'
 services:
   mongodb:
@@ -5,11 +6,19 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+=======
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+>>>>>>> bf5a58b9cca772905e5babe78fb5033f5ef4f63b
     ports:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
 
+<<<<<<< HEAD
   app:
     build: .
     environment:
@@ -21,3 +30,18 @@ services:
 
 volumes:
   mongodb_data:
+=======
+  nodeapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: nodeapp_container
+    depends_on:
+      - mongodb
+    environment:
+      DB_URL: mongodb://mongodb:27017/dbmongo
+
+volumes:
+  mongodb_data:
+    driver: local
+>>>>>>> bf5a58b9cca772905e5babe78fb5033f5ef4f63b
