@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: duduc.ynov.ddns.net
+  - host: duduc.ynovsophia.ddns.net
     http:
       paths:
       - backend:
@@ -23,5 +23,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - duduc.ynov.ddns.net
+    - duduc.ynovsophia.ddns.net
     secretName: webapp-general-tls
