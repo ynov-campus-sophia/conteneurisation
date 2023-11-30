@@ -8,7 +8,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: example-nginx-test
   name: example-nginx-test
-  namespace: asinatra
 spec:
   ingressClassName: nginx
   rules:
