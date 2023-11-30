@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: webapp
+  name: webapp-adam
   labels:
-    app.kubernetes.io/name: webapp
-    app.kubernetes.io/instance: webapp-asinatra
+    app.kubernetes.io/name: webapp-adam
+    app.kubernetes.io/instance: webapp-adam
 spec:
   containers:
   - name: webapp
