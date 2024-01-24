@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  ports:
+    - port: 5001
+      protocol: TCP
+  selector:
+    app: server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      initContainers:
+        - image: asinatra/alpine:v1.0.0
+          name: interface-configuration
+          command:
+          - sh
+          - -c
+          - "ip link set eth0 mtu 9000"
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+      containers:
+        - image: asinatra/alpine:v1.0.0
+          command:
+          - sh
+          - -c
+          - "ip a s eth0 && iperf -s"
+          name: server
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: iperf-allow
+spec:
+  ingress:
+  - ports:
+    - port: 5001
+      protocol: TCP
+    from:
+    - podSelector:
+        matchLabels:
+          app: client
+  podSelector:
+    matchLabels:
+      app: server

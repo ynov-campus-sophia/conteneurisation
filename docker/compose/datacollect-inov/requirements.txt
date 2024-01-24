@@ -1,0 +1,13 @@
+requests==2.31.0
+Flask==2.3.3
+krakenex==2.1.0
+pykrakenapi==0.3.1
+schedule==1.2.1
+requests==2.31.0
+psycopg2==2.9.8
+pyyaml==6.0.1
+coloredlogs==15.0.1
+validators==0.22.0
+python-dateutil==2.8.2
+flask-sqlalchemy==3.1.1
+numpy==1.19.2

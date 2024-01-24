@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask
+  labels:
+    app.kubernetes.io/name: flask
+    app.kubernetes.io/instance: flask-asinatra
+spec:
+  imagePullSecrets:
+  - name: myimagepullsecret
+  containers:
+  - name: flask
+    image: asinatra/secure:v1.0.3
+    ports:
+      - name: http
+        containerPort: 5000
+        protocol: TCP

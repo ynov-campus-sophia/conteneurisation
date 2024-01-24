@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  labels:
+    app: debug
+spec:
+  containers:
+  - name: debug
+    image: asinatra/arpscan:v1.0.3
+    command: ["sleep"]
+    args: ["5000"]

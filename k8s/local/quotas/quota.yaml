@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+namespace: team1
+metadata:
+  name: default-deny-all
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: v1
+kind: ResourceQuota
+namespace: team1
+metadata:
+  name: compute-resources
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 2Gi
+---
+apiVersion: v1
+kind: LimitRange
+namespace: team1
+metadata:
+  name: resource-constraint
+spec:
+  limits:
+  - default: # this section defines default limits
+      cpu: 100m
+    defaultRequest: # this section defines default requests
+      cpu: 50m
+    max: # max and min define the limit range
+      cpu: 300m
+    min:
+      cpu: 50m
+    type: Container

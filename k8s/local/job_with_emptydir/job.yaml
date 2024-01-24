@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fetch
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: s3
+        image: asinatra/awscli:v1.0.0
+        args: ["s3","cp","s3://ynovcampus/storage","/usr/local/data", "--recursive", "--endpoint-url", "https://ams3.digitaloceanspaces.com"]
+        volumeMounts:
+        - mountPath: /usr/local/data
+          name: container-storage
+      restartPolicy: Never
+      nodeSelector:
+        service: apps
+      volumes:
+      - name: container-storage
+        emptyDir:
+          medium: Memory
+          sizeLimit: 1Gi
+      containers:
+      - name: init-myapp
+        image: busybox:1.28
+        command: ['sh', '-c', 'echo The download completed! && sleep 30']
+  backoffLimit: 1

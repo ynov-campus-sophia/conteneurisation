@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memleak
+spec:
+  containers:
+  - name: app
+    image: asinatra/memleak
+    command: ["/usr/local/bin/run.sh"]
+    args: ["10m"]
+    resources:
+      requests:
+        cpu: 100m
+        memory: 100Mi
+      limits:
+        cpu: 500m
+        memory: 300Mi

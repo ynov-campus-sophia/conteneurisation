@@ -1,0 +1,4 @@
+node_modules
+.pydevproject
+generated
+docker/compose-traefik

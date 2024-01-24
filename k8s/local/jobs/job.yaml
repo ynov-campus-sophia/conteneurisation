@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fetch
+spec:
+  template:
+    spec:
+      containers:
+      - name: git
+        image: alpine/git:v2.30.2
+        command: ["clone",  "https://github.com/FairwindsOps/polaris"]
+      restartPolicy: Never
+  backoffLimit: 4

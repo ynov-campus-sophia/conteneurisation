@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: client
+spec:
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - image: asinatra/alpine:v1.0.0
+          name: interface-configuration
+          command:
+          - sh
+          - -c
+          - "ip link set eth0 mtu 9000"
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+      containers:
+        - image: asinatra/alpine:v1.0.0
+          command:
+          - sh
+          - -c
+          - "ip a s eth0 && iperf -c server -i1 -t 10 -M 8960 -m"
+          name: client
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN

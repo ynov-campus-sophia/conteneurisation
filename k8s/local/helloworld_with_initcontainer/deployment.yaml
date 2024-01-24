@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello-world-init
+  name: hello-world-deployment-init
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: hello-world-init
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: hello-world-init
+    spec:
+      initContainers:
+      - name: init-myapp
+        image: busybox:1.28
+        command: ['sh', '-c', 'echo The app is running! && sleep 30']
+      containers:
+      - image: asinatra/secure:v1.0.4
+        imagePullPolicy: IfNotPresent
+        name: hello-world
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 80m
+            memory: 128Mi
+      restartPolicy: Always
